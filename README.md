@@ -1,33 +1,44 @@
-# Greenilo — zmiana cen i edycja ofert
+# Allegro Panel Greenilo — panel sprzedaży i magazynu
 
-Greenilo to wewnętrzny panel do kontroli ofert sprzedażowych na Allegro. Łączy lokalną listę produktów i skaner cen konkurencji z oficjalnym Allegro REST API.
+Allegro Panel Greeniloo to lokalna aplikacja webowa w Pythonie i Flasku do obsługi ofert, produktów i procesów sprzedażowych na kilku platformach. Serwer działa na komputerze użytkownika, a panel otwiera się w przeglądarce pod adresem `http://localhost:5000`.
 
 ## Co robi program
 
-- Importuje listę produktów z pliku `linki.txt` oraz wyniki analizy z arkuszy XLSX.
-- Uruchamia skaner, który sprawdza ceny ofert konkurencyjnych dla produktów z listy.
-- Pobiera przez Allegro API listę własnych ofert, ich ceny, dostępny stan oraz status publikacji.
-- Pokazuje oferty aktywne, nieaktywne, w trakcie aktywacji, zakończone i takie, których nie znaleziono na koncie.
-- Łączy rekord z Allegro po dokładnym numerze oferty (`offerId`), bez zgadywania na podstawie podobnego tytułu.
-- Wyświetla rekomendację ceny na podstawie zaimportowanego wyniku analizy.
-- Pozwala wysłać zmianę ceny pojedynczej oferty po sprawdzeniu i potwierdzeniu kwoty przez użytkownika.
+- Prowadzi lokalny magazyn produktów i powiązanych ofert.
+- Importuje i eksportuje dane z arkuszy Excel.
+- Pomaga zarządzać ofertami oraz stanami na Allegro, Empik, OLX i Vinted.
+- Obsługuje wybrane procesy związane z zamówieniami, sprzedażą, zwrotami i aktualizacją stanów.
+- Udostępnia narzędzia do przygotowywania i publikowania treści na Facebooku.
+- Przechowuje dane aplikacji w lokalnej bazie SQLite.
 
-## Jak działa integracja
+Zakres dostępnych działań zależy od platformy i skonfigurowanego konta.
 
-Program korzysta z Allegro REST API oraz OAuth 2.0 Authorization Code z PKCE. Użytkownik loguje się na stronie Allegro i sam zatwierdza dostęp. Integracja wymaga uprawnień do odczytu oraz edycji ofert.
+## Integracje z platformami
 
-Panel pobiera dane ofert i ich status publikacji. Przy zmianie ceny wysyła do Allegro wyłącznie nowe pole ceny w wybranej ofercie. Nie zmienia ceny samoczynnie i nie obsługuje zamówień, płatności ani wiadomości.
+Allegro i OLX łączą się z kontem przez ich mechanizmy autoryzacji. Empik korzysta z danych integracyjnych skonfigurowanych przez użytkownika. Funkcje Vinted używają automatyzacji przeglądarki Playwright; użytkownik loguje się samodzielnie w uruchomionym profilu przeglądarki. Poszczególne funkcje Facebooka wymagają podłączenia i ustawień konta użytkownika.
 
-Każde żądanie API zawiera identyfikator `User-Agent` wygenerowany w Allegro Developer Apps, aby Allegro mogło rozpoznać aplikację.
+Program może odczytywać dane kont oraz wykonywać skonfigurowane operacje, takie jak aktualizacja oferty lub stanu. Przed podłączeniem kont zapoznaj się z zakresem uprawnień i zasadami danej platformy.
+
+## API
+
+Aplikacja ma wewnętrzne trasy API używane przez jej panel webowy. Wymagają zalogowania do MultiSales Pro. Nie jest to osobna, publiczna usługa API: domyślnie działa lokalnie pod `localhost:5000` i nie udostępnia oddzielnego uwierzytelniania kluczem API ani publicznej specyfikacji API.
 
 ## Dane i bezpieczeństwo
 
-Lista ofert, wyniki skanowania i ustawienia panelu są przechowywane lokalnie na komputerze użytkownika. Token OAuth jest chroniony mechanizmem Windows DPAPI dla bieżącego konta Windows. Dane logowania do Allegro są wprowadzane bezpośrednio na stronie Allegro; program nie zapisuje hasła do konta.
+Baza SQLite, przesłane pliki, profile przeglądarki i ustawienia są przechowywane lokalnie. Dane dostępowe integracji, w tym tokeny OAuth, są zapisywane w bazie aplikacji. Chroń folder programu i wykonuj kopie zapasowe bazy. Nie publikuj bazy, plików sesji, kluczy ani danych kont w repozytorium.
+
+Każda instalacja powinna używać własnego konta Allegro Panel Greenilo i własnych połączeń z platformami. Program nie zawiera wspólnych danych logowania do kont sprzedażowych.
+
+## Instalacja w Windows
+
+1. Zainstaluj Python 3.11 lub nowszy z Python Launcher (`py`).
+2. Uruchom `instaluj.bat`. Skrypt tworzy środowisko `.venv`, instaluje zależności i pobiera Chromium dla Playwright.
+3. Uruchom `uruchom.bat`.
+4. Otwórz `http://localhost:5000` i utwórz własne konto. Przy pierwszym uruchomieniu konto tworzy się lokalnie na komputerze, na którym działa serwer.
+5. Dodaj własne integracje w ustawieniach programu.
+
+Pozostaw okno serwera otwarte podczas pracy. Aby go zatrzymać, naciśnij Ctrl+C w tym oknie.
 
 ## Przeznaczenie
 
-Program jest przeznaczony do własnego użytku sprzedawcy Greenilo w celu monitorowania własnych ofert i ręcznego zarządzania ich cenami na Allegro.
-
-## Wsparcie
-
-Program jest narzędziem wewnętrznym. W przypadku pytań dotyczących jego działania skontaktuj się z administratorem konta Greenilo.
+Allegro Panel Greenilo jest narzędziem do lokalnej obsługi własnych procesów sprzedażowych. Nie zawiera gotowych danych kont marketplace ani publicznego hostingu. Korzystaj z integracji zgodnie z regulaminami i dokumentacją poszczególnych platform.
