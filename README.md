@@ -1,6 +1,6 @@
-# Allegro Panel Greenilo — panel sprzedaży i magazynu
+# Greenilo zmiana cen i ofert
 
-Allegro Panel Greeniloo to lokalna aplikacja webowa w Pythonie i Flasku do obsługi ofert, produktów i procesów sprzedażowych na kilku platformach. Serwer działa na komputerze użytkownika, a panel otwiera się w przeglądarce pod adresem `http://localhost:5000`.
+Greenilo zmiana cen i ofert to lokalna aplikacja webowa w Pythonie i Flasku do obsługi ofert, produktów i procesów sprzedażowych na kilku platformach. Serwer działa na komputerze użytkownika, a panel otwiera się w przeglądarce pod adresem `http://localhost:5000`.
 
 ## Co robi program
 
@@ -21,13 +21,13 @@ Program może odczytywać dane kont oraz wykonywać skonfigurowane operacje, tak
 
 ## API
 
-Aplikacja ma wewnętrzne trasy API używane przez jej panel webowy. Wymagają zalogowania do MultiSales Pro. Nie jest to osobna, publiczna usługa API: domyślnie działa lokalnie pod `localhost:5000` i nie udostępnia oddzielnego uwierzytelniania kluczem API ani publicznej specyfikacji API.
+Aplikacja ma wewnętrzne trasy API używane przez jej panel webowy. Wymagają zalogowania do Greenilo. Nie jest to osobna, publiczna usługa API: domyślnie działa lokalnie pod `localhost:5000` i nie udostępnia oddzielnego uwierzytelniania kluczem API ani publicznej specyfikacji API.
 
 ## Dane i bezpieczeństwo
 
 Baza SQLite, przesłane pliki, profile przeglądarki i ustawienia są przechowywane lokalnie. Dane dostępowe integracji, w tym tokeny OAuth, są zapisywane w bazie aplikacji. Chroń folder programu i wykonuj kopie zapasowe bazy. Nie publikuj bazy, plików sesji, kluczy ani danych kont w repozytorium.
 
-Każda instalacja powinna używać własnego konta Allegro Panel Greenilo i własnych połączeń z platformami. Program nie zawiera wspólnych danych logowania do kont sprzedażowych.
+Każda instalacja powinna używać własnego konta Greenilo i własnych połączeń z platformami. Program nie zawiera wspólnych danych logowania do kont sprzedażowych.
 
 ## Instalacja w Windows
 
@@ -41,4 +41,4 @@ Pozostaw okno serwera otwarte podczas pracy. Aby go zatrzymać, naciśnij Ctrl+C
 
 ## Przeznaczenie
 
-Allegro Panel Greenilo jest narzędziem do lokalnej obsługi własnych procesów sprzedażowych. Nie zawiera gotowych danych kont marketplace ani publicznego hostingu. Korzystaj z integracji zgodnie z regulaminami i dokumentacją poszczególnych platform.
+Greenilo jest narzędziem do lokalnej obsługi własnych procesów sprzedażowych. Nie zawiera gotowych danych kont marketplace ani publicznego hostingu. Korzystaj z integracji zgodnie z regulaminami i dokumentacją poszczególnych platform.
